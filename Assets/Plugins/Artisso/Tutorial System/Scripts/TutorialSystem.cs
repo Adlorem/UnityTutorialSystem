@@ -59,7 +59,7 @@ namespace Artisso.TutorialSystem
             {
                 if (optionalParameters.saveMethod == TutorialSystemSaveMethod.PlayerPrefs)
                 {
-                    if (PlayerPrefs.GetInt(tutorialNumber.ToString() + "_FinishedTutorial") == 1)
+                    if (PlayerPrefs.GetInt($"TutorialNumber_{tutorialNumber}") == 1)
                     {
                         EndTutorial();
                         return;
@@ -93,11 +93,11 @@ namespace Artisso.TutorialSystem
                     }
                 }
 
-                CheckTutorialStepType();
+                CheckTutorialActionType();
             }
         }
 
-        private void CheckTutorialStepType()
+        private void CheckTutorialActionType()
         {
             switch (currentStep.actionType)
             {
@@ -143,7 +143,7 @@ namespace Artisso.TutorialSystem
             this.enabled = true;
             dialogTemplate.gameObject.SetActive(true);
             _canvasOverlay.gameObject.SetActive(true);
-
+            _selectedObject = null;
 
 
             if (optionalParameters.allowToSkip)
@@ -155,13 +155,14 @@ namespace Artisso.TutorialSystem
                 dialogTemplate.skipTutorialButton.gameObject.SetActive(false);
             }
 
-            _selectedObject = null;
-
+           
             if (optionalParameters.saveMethod == TutorialSystemSaveMethod.PlayerPrefs)
             {
-                if (PlayerPrefs.GetInt(tutorialNumber.ToString() + "_TutorialSystemStep") != 0)
+                var stepIndex = PlayerPrefs.GetInt($"Tutorial_{tutorialNumber}_Step");
+
+                if (stepIndex != 0)
                 {
-                    _currentStepIndex = PlayerPrefs.GetInt(tutorialNumber.ToString() + "_TutorialSystemStep");
+                    _currentStepIndex = stepIndex;
                 }
             }
             else
@@ -713,7 +714,7 @@ namespace Artisso.TutorialSystem
             switch (optionalParameters.saveMethod)
             {
                 case TutorialSystemSaveMethod.PlayerPrefs:
-                    PlayerPrefs.SetInt(tutorialNumber.ToString() + "_TutorialSystemStep", _currentStepIndex + 1);
+                    PlayerPrefs.SetInt($"Tutorial_{tutorialNumber}_Step", _currentStepIndex);
                     break;
                 default:
                     break;
@@ -725,7 +726,7 @@ namespace Artisso.TutorialSystem
             switch (optionalParameters.saveMethod)
             {
                 case TutorialSystemSaveMethod.PlayerPrefs:
-                    PlayerPrefs.SetInt(tutorialNumber.ToString() + "_FinishedTutorial", 1);
+                    PlayerPrefs.SetInt($"TutorialNumber_{tutorialNumber}", 1);
                     break;
                 default:
                     break;
@@ -958,7 +959,7 @@ namespace Artisso.TutorialSystem
             {
                 pix[i] = insideColor;
             }
-            // use one object to avoid memory leak
+            // use private object to avoid memory leak
             _outlineTexture = new Texture2D(width, height);
             _outlineTexture.SetPixels(pix);
             _outlineTexture.Apply();
