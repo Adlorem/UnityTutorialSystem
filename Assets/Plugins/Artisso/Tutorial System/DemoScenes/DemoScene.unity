@@ -897,7 +897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6aecd34a18ebf408bc0dc55f716c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoStart: 0
+  autoStart: 1
   tutorialNumber: 0
   defaultCanvas: {fileID: 1853920485}
   dialogTemplate: {fileID: 4711659681296245774, guid: 9bb7a3a4f0f7dfa408ad90dc21219ada, type: 3}
@@ -906,7 +906,7 @@ MonoBehaviour:
     destroyOnEnd: 0
     overlayColor: {r: 0, g: 0, b: 0, a: 0}
     saveMethod: 0
-    textDisplaySpeed: 0
+    textDisplaySpeed: 0.0174
     displayImage: 1
     defaultImage: {fileID: 21300000, guid: dda46d363d1c9234093866f2748a52dd, type: 3}
   tutorialList:
@@ -917,6 +917,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 0
       freezeTime: 0
@@ -938,6 +939,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 0
       freezeTime: 0
@@ -959,6 +961,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 0
       freezeTime: 0
@@ -980,6 +983,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 0
       freezeTime: 0
@@ -1001,6 +1005,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 0
       freezeTime: 0
@@ -1022,6 +1027,7 @@ MonoBehaviour:
       timeToWait: 4
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 0
       freezeTime: 0
@@ -1043,6 +1049,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 4
       timer: 0
+      allowBackStep: 0
       lockInterface: 0
       showOverlay: 0
       freezeTime: 0
@@ -1064,6 +1071,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 0
       freezeTime: 0
@@ -1085,6 +1093,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 0
       freezeTime: 0
@@ -1106,6 +1115,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 0
       freezeTime: 0
@@ -1127,6 +1137,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 0
       freezeTime: 0
@@ -1148,6 +1159,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 0
       freezeTime: 0
@@ -1170,6 +1182,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 0
       freezeTime: 1
@@ -1191,6 +1204,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 0
       freezeTime: 0
@@ -1212,6 +1226,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 0
       freezeTime: 0
@@ -1233,6 +1248,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 8
       timer: 0
+      allowBackStep: 1
       lockInterface: 0
       showOverlay: 0
       freezeTime: 0
@@ -1254,6 +1270,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 0
       freezeTime: 0
@@ -1276,6 +1293,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 1
       freezeTime: 0
@@ -1297,6 +1315,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 1
       freezeTime: 0
@@ -1318,6 +1337,7 @@ MonoBehaviour:
       timeToWait: 10
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 1
       freezeTime: 0
@@ -1339,6 +1359,7 @@ MonoBehaviour:
       timeToWait: 10
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 1
       freezeTime: 0
@@ -1360,6 +1381,7 @@ MonoBehaviour:
       timeToWait: 0
       eventType: 13
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 1
       freezeTime: 0
@@ -1381,6 +1403,7 @@ MonoBehaviour:
       timeToWait: 3
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 0
       showOverlay: 0
       freezeTime: 0
@@ -1414,6 +1437,7 @@ MonoBehaviour:
       timeToWait: 3
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 1
       freezeTime: 0
@@ -1448,6 +1472,7 @@ MonoBehaviour:
       timeToWait: 10
       eventType: 0
       timer: 0
+      allowBackStep: 0
       lockInterface: 1
       showOverlay: 1
       freezeTime: 0
@@ -1470,6 +1495,7 @@ MonoBehaviour:
     timeToWait: 0
     eventType: 0
     timer: 0
+    allowBackStep: 0
     lockInterface: 0
     showOverlay: 0
     freezeTime: 0

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 //using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
@@ -184,6 +183,11 @@ namespace Artisso.TutorialSystem
             GoToNextTutorialStep();
         }
 
+        private void OnDialogPreviousButtonClicked()
+        {
+            GoToPreviousTutorialStep();
+        }
+
         private void CreateTutorialInstance()
         {
             if (Instance == null)
@@ -200,6 +204,7 @@ namespace Artisso.TutorialSystem
                     dialogTemplate.gameObject.SetActive(false);
                     //add dialog buttons listeners
                     dialogTemplate.nextStepButton.onClick.AddListener(delegate { OnDialogNextButtonClicked(); });
+                    dialogTemplate.previousStepButton.onClick.AddListener(delegate { OnDialogPreviousButtonClicked(); });
                     dialogTemplate.skipTutorialButton.onClick.AddListener(delegate { OnSkiptButtonClicked(); });
                 }
                 else
@@ -209,6 +214,8 @@ namespace Artisso.TutorialSystem
                 }
             }
         }
+
+
 
         private string ValidateInstance()
         {
@@ -225,6 +232,10 @@ namespace Artisso.TutorialSystem
             if (dialogTemplate.nextStepButton == null)
             {
                 sb.Append("ERROR: No next step button defined in dialog template\r\n");
+            }
+            if (dialogTemplate.previousStepButton == null)
+            {
+                sb.Append("ERROR: No previous step button defined in dialog template\r\n");
             }
             if (dialogTemplate.skipTutorialButton == null)
             {
@@ -245,7 +256,7 @@ namespace Artisso.TutorialSystem
             return sb.ToString();
         }
 
-        private void PlayTutorialStep(int specificStep)
+        private void PlayTutorialStep(int stepId)
         {
             if (!IsTutorialFinished())
             {
@@ -254,33 +265,14 @@ namespace Artisso.TutorialSystem
                     StopCoroutine(_textTypingCorouitune);
                 }
 
-                _currentStepIndex = specificStep;
-                currentStep = _currentTutorial[specificStep];
+                _currentStepIndex = stepId;
+                currentStep = _currentTutorial[stepId];
                 _currentStepTargetType = GetCurrentStepTargetType();
+                currentStep.timer = 0f;
 
 
-                dialogTemplate.gameObject.SetActive(true);
+                SetDialogForCurrentStep();
                 DisplayDialogAtPosition(currentStep.target.gameObject);
-
-
-                if (currentStep.actionType == TutorialSystemStepType.NextButtonClick)
-                {
-                    dialogTemplate.nextStepButton.gameObject.SetActive(true);
-                }
-                else
-                {
-                    dialogTemplate.nextStepButton.gameObject.SetActive(false);
-                }
-
-                if (currentStep.actionType == TutorialSystemStepType.TimeDelay)
-                {
-                    currentStep.timer = 0f;
-                    dialogTemplate.timer.SetActive(true);
-                }
-                else
-                {
-                    dialogTemplate.timer.SetActive(false);
-                }
 
                 if (currentStep.actionType == TutorialSystemStepType.EventTrigger)
                 {
@@ -328,6 +320,20 @@ namespace Artisso.TutorialSystem
             {
                 EndTutorial();
             }
+        }
+
+        private void SetDialogForCurrentStep()
+        {
+            dialogTemplate.gameObject.SetActive(true);
+
+            dialogTemplate.previousStepButton.gameObject.SetActive(currentStep.allowBackStep);
+
+            bool isNextButton = currentStep.actionType == TutorialSystemStepType.NextButtonClick;
+            dialogTemplate.nextStepButton.gameObject.SetActive(isNextButton);
+
+            bool isTimeButton = currentStep.actionType == TutorialSystemStepType.TimeDelay;
+            dialogTemplate.timer.SetActive(isTimeButton);
+
         }
 
         private void AddImageToDialogTemplate()
@@ -440,6 +446,14 @@ namespace Artisso.TutorialSystem
                 StartCoroutine(GoToNextTutorialStepCoroutine());
             }
 
+        }
+
+        private void GoToPreviousTutorialStep()
+        {
+            if (_currentStepIndex > 0)
+            {
+                PlayTutorialStep(_currentStepIndex - 1);
+            }
         }
 
         private IEnumerator GoToNextTutorialStepCoroutine()
@@ -587,7 +601,6 @@ namespace Artisso.TutorialSystem
         private void AddButtonClickListener()
         {
             currentStep.target.gameObject.AddComponent<OnButtonClickListener>();
-            currentStep.target.gameObject.GetComponent<EventTriggerListener>().eventType = currentStep.eventType;
         }
 
         private void AddCollinderEnterListener()
@@ -610,12 +623,15 @@ namespace Artisso.TutorialSystem
 
         public void EndTutorial()
         {
-            DeactivateTutorialSystem();
             SaveTutorialEnd();
 
             if (optionalParameters.destroyOnEnd)
             {
                 DestroyTutorialSystem();
+            }
+            else
+            {
+                DeactivateTutorialSystem();
             }
         }
 

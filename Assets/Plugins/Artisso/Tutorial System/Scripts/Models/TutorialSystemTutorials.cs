@@ -12,7 +12,7 @@ namespace Artisso.TutorialSystem
     }
 
     [Serializable]
-    public class TutorialSystemStep
+    public struct TutorialSystemStep
     {
         [Tooltip("Text to display in current step dialog window")]
         [TextArea]
@@ -34,7 +34,10 @@ namespace Artisso.TutorialSystem
         public TutorialSystemEventTriggerType eventType;
 
         [HideInInspector]
-        public float timer = 0f;
+        public float timer;
+
+        [Tooltip("Allows user to come back to previous step")]
+        public bool allowBackStep;
 
         [Tooltip("Disables interface in current step, except target game object")]
         public bool lockInterface;
@@ -43,7 +46,7 @@ namespace Artisso.TutorialSystem
         [ConditionalAttributeProperty("lockInterface", true)]
         public bool showOverlay;
 
-        [Tooltip("Sets time scale to 0 for in this step")]
+        [Tooltip("Sets time scale to 0 in this step")]
         public bool freezeTime;
 
         [Tooltip("Places dialog window at specific screen position. Default option tries to attach dialog to target game object")]
